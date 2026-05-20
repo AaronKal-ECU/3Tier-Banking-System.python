@@ -1,17 +1,15 @@
 """
-export_db.py - Export SQLite database tables to CSV and XLSX
+export_db.py - Export SQLite database tables to CSV and XLSX formats
 ============================================================
-Run this AFTER running the system and tests to generate supporting
-documents for assignment submission.
-
-Usage: python export_db.py
-
+Run this AFTER running the system and populating the database.
 Output files:
   - db_export/users.csv
   - db_export/accounts.csv
   - db_export/transfers.csv
   - db_export/audit_log.csv
   - db_export/banking_data.xlsx  (all tables in one workbook)
+===========================================================================
+Aaron Kalaji 10670705, CSI3344 Assignment 2
 """
 
 import sqlite3
