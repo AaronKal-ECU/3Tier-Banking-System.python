@@ -115,14 +115,13 @@ def init_db():
 def _seed_mock_data(conn):
     """
     these are the example accounts used in testing
+    user_id, username, password, full_name, account_id, phone, balance_cents
     """
     now = _now_iso()
-    # (user_id, username, password, full_name, account_id, phone, balance_cents)
     mock = [
-        ("USR001", "alice", "alice123", "Alice Johnson",  "ACC001", "0411111111", 5_000_000),
-        ("USR002", "bob",   "bob123",   "Bob Smith",       "ACC002", "0422222222", 2_000_000),
-        ("USR003", "carol", "carol123", "Carol White",     "ACC003", "0433333333",   500_000),
-        ("USR004", "dave",  "dave123",  "Dave Martinez",   "ACC004", "0444444444",15_000_000),
+        ("USR001", "aaron", "aaron123", "Aaron Kalaji",  "ACC001", "0411111111", 1_000_000),
+        ("USR002", "harry", "harry123", "Harry Stubbs",   "ACC002", "0422222222", 2_000_000),
+        ("USR003", "kun",   "kun123",   "Kun Hu",     "ACC003", "0433333333",   9_999_999),
     ]
     for (uid, uname, pwd, fname, acc_id, phone, bal) in mock:
         conn.execute(
@@ -134,7 +133,7 @@ def _seed_mock_data(conn):
             (acc_id, uid, phone, bal, now)
         )
     conn.commit()
-    print("[BDB] Mock data seeded:")
+    print("[BDB] data seeded:")
     for (_, uname, pwd, fname, acc_id, phone, bal) in mock:
         print(f"      {uname}/{pwd}  |  {acc_id}  |  {phone}  |  ${bal/100:,.2f}")
 

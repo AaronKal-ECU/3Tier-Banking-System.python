@@ -2,7 +2,7 @@
 bas_server.py, Bank Application Server, application tier
 ===========================================================================
 INSTRUCTIONS
-to run the program, place all 6 python files in one location, then open 4 terminal
+to run the program, place all 5 python files in one location, then open 4 terminal
 windows at the location. paste each command in each terminal in the following order:
 - python -m Pyro5.nameserver
 - python bdb_server.py

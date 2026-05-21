@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2fb83547-c480-447e-98bd-e09d3d32707a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/export_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/export_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared.py" beforeDir="false" afterPath="$PROJECT_DIR$/shared.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bank.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bas_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/bas_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bc_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/bc_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bdb_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/bdb_server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +26,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 0
 }]]></component>
@@ -38,6 +43,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -68,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779275644491</updated>
-      <workItem from="1779275647053" duration="7173000" />
+      <workItem from="1779275647053" duration="12178000" />
     </task>
     <servers />
   </component>

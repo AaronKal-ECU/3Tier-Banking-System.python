@@ -2,8 +2,9 @@
 bc_client.py, Banking Client, client tier of banking system
 ===========================================================================
 INSTRUCTIONS
-to run the program, place all 6 python files in one location, then open 4 terminal
-windows at the location. paste each command in each terminal in the following order:
+to run the program, place all 5 python files in one location, then open 4 terminal
+windows at the same directory. then paste each of the following commands in
+each terminal in the following order:
 - python -m Pyro5.nameserver
 - python bdb_server.py
 - python bas_server.py
@@ -293,7 +294,8 @@ def do_logout(token):
     press_enter()
 
 def main():
-    print_header("Banking Client (BC)")
+    print_header(""
+                 "Banking Client (BC)")
     print("  Connecting to BAS server...")
     try:
         with get_bas() as bas:
