@@ -1,17 +1,9 @@
 """
 shared.py - Shared constants, fee logic, and utilities used by BAS and BDB server
 ==========================================================================
+this file is used to keep logic consistent across the system.
 All monetary values stored as integer CENTS to avoid floating point.
-Phone numbers are normalised to 10-digit Australian mobile format.
-===========================================================================
-INSTRUCTIONS
-to run the program, place all 6 python files in one location, then open 4 terminal
-windows at the location. paste each command in each terminal in the following order:
-- python -m Pyro5.nameserver
-- python bdb_server.py
-- python bas_server.py
-once all three are running in separate terminals, execute the final one for the UI:
-python bas_server.py
+Phone numbers are normalised to 10-digit Australian mobile format regardless of input
 ===========================================================================
 Aaron Kalaji 10670705, CSI3344 Assignment 2
 """
@@ -22,13 +14,11 @@ import re
 # Pyro5 service names
 BDB_SERVICE_NAME = "banking.bdb"
 BAS_SERVICE_NAME = "banking.bas"
-
-# Transfer statuses
+# statuses
 STATUS_PENDING   = "PENDING"
 STATUS_COMPLETED = "COMPLETED"
 STATUS_FAILED    = "FAILED"
-
-# Fee table: (min_cents_exclusive, max_cents_inclusive, rate, cap_cents)
+# min_cents_exclusive, max_cents_inclusive, rate, cap_cents)
 FEE_TIERS = [
     (        0,    200000, 0.0000,  0),
     (   200000,  1000000, 0.0025, 2000),
@@ -38,10 +28,8 @@ FEE_TIERS = [
     ( 10000000,     None, 0.0006, 20000),
 ]
 
-
 def round_half_up(value: float) -> int:
     return math.floor(value + 0.5)
-
 
 def calculate_fee_cents(amount_cents: int) -> int:
     if amount_cents < 0:
@@ -53,12 +41,10 @@ def calculate_fee_cents(amount_cents: int) -> int:
             return min(round_half_up(amount_cents * rate), cap)
     return 0
 
-
 def cents_to_str(cents: int) -> str:
     dollars   = cents // 100
     remainder = cents % 100
     return f"${dollars:,}.{remainder:02d}"
-
 
 def parse_amount(amount_str: str) -> int:
     cleaned = amount_str.replace(",", "").strip().lstrip("$")
@@ -70,13 +56,10 @@ def parse_amount(amount_str: str) -> int:
         raise ValueError("Amount cannot be negative")
     return round_half_up(value * 100)
 
-
 def normalise_phone(raw: str) -> str:
     """
-    Normalise a phone number to 10-digit Australian mobile format.
-    Accepts:  0412345678  |  04 1234 5678  |  +61412345678  |  61412345678
-    Returns:  '0412345678'
-    Raises ValueError if not a valid Australian mobile.
+    convert input from user to 10-digit  mobile format.
+    Accepts: 0412345678, 04 1234 5678, +61412345678, 61412345678, returns standard int
     """
     digits = re.sub(r"\D", "", raw)          # strip everything non-digit
     if digits.startswith("61"):
@@ -88,9 +71,8 @@ def normalise_phone(raw: str) -> str:
         )
     return digits
 
-
 def format_phone_display(phone: str) -> str:
-    """Format 0412345678 -> 0412 345 678 for display."""
+    """format numbers for display"""
     if len(phone) == 10:
         return f"{phone[:4]} {phone[4:7]} {phone[7:]}"
     return phone

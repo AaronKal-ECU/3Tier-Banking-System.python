@@ -16,27 +16,23 @@ import sqlite3
 import csv
 import os
 import sys
-
 DB_PATH = "bank.db"
 EXPORT_DIR = "db_export"
 
-
 def get_conn():
     if not os.path.exists(DB_PATH):
-        print(f"[ERROR] Database '{DB_PATH}' not found.")
-        print("  Run bdb_server.py first to initialize the database.")
+        print(f"Database '{DB_PATH}' not found, Run bdb_server.py first")
         sys.exit(1)
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
-
 
 def export_table_to_csv(conn, table: str, filename: str):
     cur = conn.cursor()
     cur.execute(f"SELECT * FROM {table}")
     rows = cur.fetchall()
     if not rows:
-        print(f"  [WARN] Table '{table}' is empty.")
+        print(f"  Table '{table}' is empty.")
         return []
 
     headers = [description[0] for description in cur.description]
@@ -48,25 +44,22 @@ def export_table_to_csv(conn, table: str, filename: str):
     print(f"  Exported {len(rows)} rows → {filename}")
     return rows, headers
 
-
 def export_all_to_xlsx(conn, xlsx_path: str):
     try:
         import openpyxl
         from openpyxl.styles import Font, PatternFill, Alignment
         from openpyxl.utils import get_column_letter
     except ImportError:
-        print("  [WARN] openpyxl not installed. Skipping XLSX export.")
-        print("         Run: pip install openpyxl")
+        print("openpyxl not installed skipping XLSX export..")
         return
 
     wb = openpyxl.Workbook()
-    wb.remove(wb.active)  # Remove default sheet
+    wb.remove(wb.active)
 
     HEADER_FILL = PatternFill("solid", fgColor="1F4E79")
     HEADER_FONT = Font(color="FFFFFF", bold=True)
 
     tables = ["users", "accounts", "sessions", "transfers", "audit_log"]
-
     for table in tables:
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM {table}")
@@ -74,22 +67,18 @@ def export_all_to_xlsx(conn, xlsx_path: str):
         if not rows:
             continue
         headers = [d[0] for d in cur.description]
-
         ws = wb.create_sheet(title=table.capitalize())
 
-        # Write header row
         for col_idx, header in enumerate(headers, 1):
             cell = ws.cell(row=1, column=col_idx, value=header)
             cell.fill = HEADER_FILL
             cell.font = HEADER_FONT
             cell.alignment = Alignment(horizontal="center")
 
-        # Write data rows
         for row_idx, row in enumerate(rows, 2):
             for col_idx, value in enumerate(list(row), 1):
                 ws.cell(row=row_idx, column=col_idx, value=value)
 
-        # Auto-fit columns
         for col_idx, header in enumerate(headers, 1):
             col_letter = get_column_letter(col_idx)
             max_len = max(
@@ -97,16 +86,13 @@ def export_all_to_xlsx(conn, xlsx_path: str):
                 *[len(str(row[col_idx - 1])) for row in rows]
             )
             ws.column_dimensions[col_letter].width = min(max_len + 2, 40)
-
         print(f"  Sheet '{table.capitalize()}': {len(rows)} rows")
-
     wb.save(xlsx_path)
     print(f"  Saved workbook → {xlsx_path}")
 
-
 def print_summary(conn):
-    """Print a human-readable summary of the database state."""
-    print("\n  ── Database Summary ──────────────────────────")
+    """Print a summary of the database from our banking system"""
+    print("\n  Database Summary")
     cur = conn.cursor()
 
     cur.execute("SELECT u.username, u.full_name, a.account_id, a.balance_cents "
@@ -124,36 +110,29 @@ def print_summary(conn):
         print("\n  Transfer Status Summary:")
         for row in rows:
             print(f"  {row['status']}: {row['cnt']}")
-
     cur.execute("SELECT COUNT(*) FROM audit_log")
     print(f"\n  Audit log entries: {cur.fetchone()[0]}")
     print("  ──────────────────────────────────────────────")
 
-
 def main():
     print("=" * 52)
-    print("  Banking DB Export Tool")
+    print("  Export database from banking system")
     print("=" * 52)
-
     os.makedirs(EXPORT_DIR, exist_ok=True)
     conn = get_conn()
-
     print(f"\n  Exporting to '{EXPORT_DIR}/'...")
 
     tables = ["users", "accounts", "sessions", "transfers", "audit_log"]
     for table in tables:
         path = os.path.join(EXPORT_DIR, f"{table}.csv")
         export_table_to_csv(conn, table, path)
-
     xlsx_path = os.path.join(EXPORT_DIR, "banking_data.xlsx")
     export_all_to_xlsx(conn, xlsx_path)
-
     print_summary(conn)
     conn.close()
 
     print(f"\n  Export complete. Files in '{EXPORT_DIR}/'")
     print("  Include 'banking_data.xlsx' in your assignment submission.\n")
-
 
 if __name__ == "__main__":
     main()
