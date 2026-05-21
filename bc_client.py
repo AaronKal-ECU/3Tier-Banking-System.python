@@ -29,7 +29,7 @@ def get_bas():
         uri = ns.lookup(BAS_SERVICE_NAME)
         return Pyro5.api.Proxy(uri)
     except Exception as e:
-        print(f"\n[ERROR] Cannot connect to BAS server: {e}")
+        print(f"\nError. Cannot connect to BAS server: {e}")
         print("  Start in order:")
         print("    1. python -m Pyro5.nameserver")
         print("    2. python bdb_server.py")
@@ -51,12 +51,13 @@ def print_ok(msg):
 def press_enter():
     input("\n  Press Enter to continue...")
 
-
 # login
 def screen_login():
-    print_header("Banking System: Sign In")
-    print("  testing accounts:  alice/alice123  ·  bob/bob123")
-    print("                     carol/carol123  ·  dave/dave123\n")
+    print_header("Welcome to The Banking System, Please Sign In")
+    print("  Testing Accounts:                          \n")
+    print("  usernames:     aaron,      harry,       kun")
+    print("  passwords:     aaron123,   harry123,    kun123")
+    print("  balances:      $1,000,000  $2,000,000   $9,999,999")
     username = input("  Username: ").strip()
     if not username:
         return None, None, None
@@ -123,7 +124,7 @@ def do_balance(token):
 def do_transfer(token):
     print_section("New Transfer with PayID")
     print("  Enter the recipient's mobile number.")
-    print("  Example: 0423 456 789\n")
+    print("  Example: 0422 222 222\n")
 
     # Step 1: resolve phone → masked name
     raw_phone = input("  Recipient phone: ").strip()
@@ -295,7 +296,7 @@ def do_logout(token):
 
 def main():
     print_header(""
-                 "Banking Client (BC)")
+                 "Banking Client ")
     print("  Connecting to BAS server...")
     try:
         with get_bas() as bas:

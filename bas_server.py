@@ -77,7 +77,7 @@ class BASService:
     def lookup_payid(self, token: str, raw_phone: str) -> dict:
         """
         Step 1 of transfer: resolve a phone number to a masked name.
-        Client uses this to confirm 'Sending to Alice J.?' before submitting.
+        Client uses this to confirm 'Sending to Aaron K.?' before submitting.
         """
         session = self._require_auth(token)
         if not session["valid"]:

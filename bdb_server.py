@@ -119,9 +119,9 @@ def _seed_mock_data(conn):
     """
     now = _now_iso()
     mock = [
-        ("USR001", "aaron", "aaron123", "Aaron Kalaji",  "ACC001", "0411111111", 1_000_000),
-        ("USR002", "harry", "harry123", "Harry Stubbs",   "ACC002", "0422222222", 2_000_000),
-        ("USR003", "kun",   "kun123",   "Kun Hu",     "ACC003", "0433333333",   9_999_999),
+        ("USR001", "aaron", "aaron123", "Aaron Kalaji",  "ACC001", "0411111111", 100_000_000),
+        ("USR002", "harry", "harry123", "Harry Stubbs",   "ACC002", "0422222222", 200_000_000),
+        ("USR003", "kun",   "kun123",   "Kun Hu",     "ACC003", "0433333333",   999_999_999),
     ]
     for (uid, uname, pwd, fname, acc_id, phone, bal) in mock:
         conn.execute(
