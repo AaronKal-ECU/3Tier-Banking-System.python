@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fb83547-c480-447e-98bd-e09d3d32707a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Phase 1 two tier banking system/bas_server_phase1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bank.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bas_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/bas_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bc_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/bc_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bdb_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/bdb_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_system.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779275644491</updated>
-      <workItem from="1779275647053" duration="15450000" />
+      <workItem from="1779275647053" duration="16518000" />
     </task>
     <servers />
   </component>
