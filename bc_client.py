@@ -17,7 +17,6 @@ Aaron Kalaji 10670705, CSI3344 Assignment 2
 import sys
 import uuid
 import Pyro5.api
-
 from shared import BAS_SERVICE_NAME, parse_amount, cents_to_str, format_phone_display
 
 DIVIDER = "─" * 52
@@ -78,7 +77,6 @@ def screen_login():
         press_enter()
         return None, None, None
 
-
 # menu
 def main_menu(token, account_id, phone_number):
     while True:
@@ -90,7 +88,6 @@ def main_menu(token, account_id, phone_number):
         print("  5. Fee Calculator")
         print("  6. Logout")
         choice = input("\n  Select (1-6): ").strip()
-
         if   choice == "1": do_balance(token)
         elif choice == "2": do_transfer(token)
         elif choice == "3": do_status(token)
@@ -103,9 +100,7 @@ def main_menu(token, account_id, phone_number):
             print_error("Please enter 1–6.")
             press_enter()
 
-
-# ── Balance ──────────────────────────────────────────────────────────
-
+# balance
 def do_balance(token):
     print_section("My Account Balance")
     with get_bas() as bas:
@@ -119,14 +114,14 @@ def do_balance(token):
     press_enter()
 
 
-# ── Transfer (2-step PayID flow) ─────────────────────────────────────
+# 2 step PayID transfer flow
 
 def do_transfer(token):
     print_section("New Transfer with PayID")
     print("  Enter the recipient's mobile number.")
     print("  Example: 0422 222 222\n")
 
-    # Step 1: resolve phone → masked name
+    # Step 1 resolves phone and returns masked name to sender
     raw_phone = input("  Recipient phone: ").strip()
     if not raw_phone:
         print_error("Cancelled. timed out")
@@ -212,7 +207,6 @@ def do_transfer(token):
         if r.get("transfer_id"):
             print(f"  Transfer ID : {r['transfer_id']}")
             print(f"  Status      : {r.get('status','FAILED')}")
-
     press_enter()
 
 # status of transfer
@@ -241,7 +235,6 @@ def do_status(token):
         print_error(r["error"])
     press_enter()
 
-
 # transfer history
 def do_history(token):
     print_section("Transfer History (last 10)")
@@ -265,7 +258,6 @@ def do_history(token):
                 print(f"     Ref: {t['reference']}")
     press_enter()
 
-
 # fee calculator
 def do_fee_preview(token):
     print_section("Fee Calculator")
@@ -285,7 +277,6 @@ def do_fee_preview(token):
     else:
         print_error(r["error"])
     press_enter()
-
 
 # logout
 def do_logout(token):

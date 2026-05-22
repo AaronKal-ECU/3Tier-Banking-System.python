@@ -1,0 +1,64 @@
+Thanks for downloading my project!
+To run the three-tier banking system in Python please follow the steps below:
+
+Ensure Python 3.8 or later is loaded and install the following on every machine:
+
+pip install Pyro5 serpent openpyxl
+
+Place all five files in the same directory (folder) on each machine:
+shared.py
+bdb_server.py
+bas_server.py
+bc_client.py
+export_db.py, this file just audits the database, but it is good to have this tool ready!
+
+Setup on one Computer
+Once the environment is setup, open four terminals all in the same project directory. Each of these terminals will run a separate server or database for our banking system.
+In each terminal, run each command in order.
+
+Terminal 1:     python -m Pyro5.nameserver
+Terminal 2:     python bdb_server.py
+Terminal 3:     python bas_server.py
+Terminal 4:     python bc_client.py	The command-line UI Login screen should appear
+
+Please run each terminal one at a time, starting with the Nameserver ensuring each command executes correctly.
+
+Setup on separate systems
+Before we begin, confirm that all machines (2-4) are on the same local network.
+Also confirm the IP addresses of at least one machine.
+Find the IP address of the Machine (A) that you want to use as the Nameserver. Then navigate back to the project’s directory.
+
+Then start the nameserver bound to that IP by using the following command in the terminal:
+python -m Pyro5.nameserver --host 192.168.1.10 (YOUR IP INSTEAD)
+
+Once confirmed by the “NS running on localhost” message, we can now point to the Nameserver via Machine (A)’s IP address.
+For the rest of the machines, use the following commands with Machine (A)’s IP address:
+
+Command (copy and paste but replace with YOUR IP)
+
+export PYRO_NS_HOST=192.168.1.10          	MacOS or Linux
+set PYRO_NS_HOST=192.168.1.10             	Windows CMD
+$env:PYRO_NS_HOST="192.168.1.10	            Windows PowerShell
+
+Once this command has executed, then follow it with the BDB, BAS and Client commands shown below:
+Machine 2:     python bdb_server.py
+Machine 3:     python bas_server.py
+Machine 4:     python bc_client.py	The command-line UI Login screen should appear
+
+The three-tier banking system should be running with its UI on the final machine/terminal.
+
+Log in using one of the three pre-loaded accounts:
+aaron       aaron123
+harry       harry123
+kun         kun123
+
+Exporting the Database and stopping the system
+Use the following command in a terminal at the projects directory:
+python export_db.py
+This creates a db_export folder containing CSV files for each table and a single banking_data.xlsx workbook highlighting all actions untaken within the system.
+
+To stop the system go back into each terminal and in reverse order stop each process with: Ctrl + C
+
+Aaron Mark Kalaji
+10670705, CSI3344 Distributed Systems
+22nd May, 2026

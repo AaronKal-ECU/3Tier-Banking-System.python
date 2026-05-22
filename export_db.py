@@ -130,9 +130,7 @@ def main():
     export_all_to_xlsx(conn, xlsx_path)
     print_summary(conn)
     conn.close()
-
     print(f"\n  Export complete. Files in '{EXPORT_DIR}/'")
-    print("  Include 'banking_data.xlsx' in your assignment submission.\n")
 
 if __name__ == "__main__":
     main()
